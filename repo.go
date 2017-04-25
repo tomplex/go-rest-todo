@@ -11,14 +11,13 @@ func init() {
     RepoCreateTodo(Todo{Name: "get a damn hairct"})
 }
 
-func RepoFindTodo(id int) Todo {
+func RepoFindTodo(id int) (Todo, error) {
     for _, t := range todos {
         if t.Id == id {
-            return t
+            return t, nil
         }
     }
-    //otherwise, return an empty todo
-    return Todo{}
+    return Todo{}, fmt.Errorf("Could not find Todo with ID of %d", id)
 }
 
 func RepoCreateTodo(t Todo) Todo {
@@ -31,9 +30,9 @@ func RepoCreateTodo(t Todo) Todo {
 func RepoDeleteTodo(id int) error {
     for i, t := range todos {
         if t.Id == id {
-            todos = append(todos[:i], todos[i+1]...)
+            todos = append(todos[:i], todos[i+1:]...)
             return nil
         }
     }
-    return fmt.Errorf("Could not find Todo with id of %d to delete", id)
+    return fmt.Errorf("Could not find Todo with ID of %d to delete", id)
 }
