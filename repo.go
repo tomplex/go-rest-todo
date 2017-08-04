@@ -5,10 +5,9 @@ import "fmt"
 var currentId int
 var todos Todos
 
-//set some seed data
 func init() {
     RepoCreateTodo(Todo{Name: "finish this tutorial"})
-    RepoCreateTodo(Todo{Name: "get a damn hairct"})
+    RepoCreateTodo(Todo{Name: "get a damn haircut"})
 }
 
 func RepoFindTodo(id int) (Todo, error) {

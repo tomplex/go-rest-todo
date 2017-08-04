@@ -1,8 +1,10 @@
 package main
 
 import (
+    "log"
     "net/http"
     "encoding/json"
+    "io/ioutil"
 )
 
 func Write404ResponseHeader(w http.ResponseWriter, r *http.Request) { 
@@ -16,4 +18,18 @@ func Write200ResponseHeader(w http.ResponseWriter, r *http.Request) {
 
 func SendAsJson(w http.ResponseWriter, t Todo) {
     json.NewEncoder(w).Encode(t)
+}
+
+func check(err error) {
+    if err != nil {
+        log.Fatalf("error: %s", err)
+        panic(err)
+    }
+}
+
+func GetFileContents(filePath string) string {
+    data, err := ioutil.ReadFile(filePath)
+    check(err)
+
+    return string(data)
 }
