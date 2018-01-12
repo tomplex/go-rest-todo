@@ -27,9 +27,15 @@ func check(err error) {
     }
 }
 
+func checkWithMsg(err error, msg string) {
+	if err != nil {
+		log.Fatalf("%s: %s", msg, err)
+	}
+}
+
 func GetFileContents(filePath string) string {
     data, err := ioutil.ReadFile(filePath)
-    check(err)
+	check(err)
 
     return string(data)
 }
